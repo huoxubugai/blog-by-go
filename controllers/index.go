@@ -3,20 +3,27 @@ package controllers
 import (
 	"blog/service"
 	"github.com/gin-gonic/gin"
-	"github.com/jinzhu/gorm"
 	"net/http"
 )
 
-func IndexGet(c *gin.Context){
+func IndexGet(c *gin.Context) {
+	//获取分类
 	typeList, err := service.GetAllType()
-	if err!=nil{
-		c.HTML(http.StatusInternalServerError,"error.html",nil)
-		return
-	}
-	c.HTML(http.StatusOK,"index.html",gin.H{
-		"types":typeList,
+	checkError(c, err)
+	//获取博客
+	blogs, err := service.GetAllBlog()
+	checkError(c, err)
+
+	c.HTML(http.StatusOK, "index.html", gin.H{
+		"types": typeList,
+		"blogs": blogs,
 	})
 
 }
 
-var DB *gorm.DB
+func checkError(c *gin.Context, err error) {
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+}
