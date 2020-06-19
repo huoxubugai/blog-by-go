@@ -14,9 +14,14 @@ func IndexGet(c *gin.Context) {
 	blogs, err := service.GetAllBlog()
 	checkError(c, err)
 
+	//获取分类
+	tags, err := service.GetAllTag()
+	checkError(c, err)
+
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"types": typeList,
 		"blogs": blogs,
+		"tags":  tags,
 	})
 
 }

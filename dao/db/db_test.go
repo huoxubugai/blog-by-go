@@ -69,3 +69,12 @@ func TestGetUserById(t *testing.T) {
 	}
 	fmt.Println(user)
 }
+
+//tag测试
+func TestGetAllTag(t *testing.T) {
+	tags, err := GetAllTag()
+	if err != nil {
+		t.Log(err)
+	}
+	fmt.Println(tags)
+}

@@ -9,7 +9,7 @@ import (
 //type即分类，因为type又是go中的关键字，因此不能直接用
 func GetAllType() ([]*models.Category, error) {
 	var typeList []*models.Category
-	rows, err := config.DB.Raw("select id,name from category").Rows()
+	rows, err := config.DB.Raw("select id,name,blog_nums from category").Rows()
 	defer rows.Close()
 	if err != nil {
 		log.Fatal(err)
