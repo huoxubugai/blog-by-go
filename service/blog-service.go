@@ -13,3 +13,11 @@ func GetAllBlog() (blogs []*models.Blog, err error) {
 	}
 	return
 }
+
+func GetBlogById(id int) (models.Blog, error) {
+	blog, err := db.GetBlogById(id)
+	if err != nil {
+		return models.Blog{}, err
+	}
+	return blog, nil
+}

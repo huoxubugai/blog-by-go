@@ -23,6 +23,7 @@ func main() {
 	router.Static("/static/", "./static")
 	setTemplate(router)
 	router.GET("/", controllers.IndexGet)
+	router.GET("/blog/:id", controllers.BlogGet)
 	router.Run()
 }
 

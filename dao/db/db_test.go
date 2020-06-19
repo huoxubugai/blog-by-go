@@ -60,6 +60,14 @@ func TestGetAllBlog(t *testing.T) {
 	}
 }
 
+func TestGetBlogById(t *testing.T) {
+	blog, err := GetBlogById(1)
+	if err != nil {
+		t.Log(err)
+	}
+	fmt.Println(blog.Title)
+}
+
 //user表测试
 func TestGetUserById(t *testing.T) {
 	user, err := GetUserById(1)
