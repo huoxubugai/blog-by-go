@@ -59,3 +59,13 @@ func TestGetAllBlog(t *testing.T) {
 		t.Logf("title:%v,description:%v", blog.Title, blog.Description)
 	}
 }
+
+//user表测试
+func TestGetUserById(t *testing.T) {
+	user, err := GetUserById(1)
+	if err != nil {
+		t.Log(err)
+		return
+	}
+	fmt.Println(user)
+}
