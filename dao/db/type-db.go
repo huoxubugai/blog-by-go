@@ -9,7 +9,7 @@ import (
 //type即分类，因为type又是go中的关键字，因此不能直接用
 func GetAllType() ([]*models.Category, error) {
 	var typeList []*models.Category
-	rows, err := config.DB.Raw("select id,name,blog_nums from category").Rows()
+	rows, err := config.DB.Raw("select id,name,blog_nums from category order by blog_nums desc").Rows()
 	defer rows.Close()
 	if err != nil {
 		log.Fatal(err)
@@ -41,4 +41,13 @@ func InsertType(category *models.Category) (id int, err error) {
 		panic(err)
 	}
 	return
+}
+
+func GetMaxBlogNumsInType() (id int, err error) {
+	//下面这句结尾加上.Error会报空指针错误，为什么呢？
+	err = config.DB.Raw("select id from category order by blog_nums desc limit 1").Row().Scan(&id)
+	if err != nil {
+		return 0, err
+	}
+	return id, nil
 }

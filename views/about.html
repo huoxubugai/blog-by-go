@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css">
+</head>
+<body>
+
+<!--导航-->
+{{template "navigation"}}
+
+<!--中间内容-->
+<div class="m-container m-padded-tb-big animated fadeIn">
+    <div class="ui container">
+
+        <div class="ui stackable grid">
+            <div class="eleven wide column">
+                <div class="ui segment">
+                    <img src="https://s1.ax1x.com/2020/05/03/YpdkQS.png" alt="" class="ui rounded image">
+                </div>
+            </div>
+            <div class="five wide column">
+                <div class="ui top attached segment">
+                    <div class="ui header">关于我</div>
+                </div>
+                <div class="ui attached segment">
+                    <p class="m-text">零分,努力提升自身知识水平中...</p>
+                    <p class="m-text">唱、跳、Rap...不会</p>
+                    <p class="m-text">公众号、知乎专栏...没有</p>
+                </div>
+                <div class="ui attached segment">
+                    <div class="ui orange basic left pointing label m-margin-tb-tiny">Coding</div>
+                    <div class="ui orange basic left pointing label m-margin-tb-tiny">Writing</div>
+                    <div class="ui orange basic left pointing label m-margin-tb-tiny">Thinking</div>
+                    <div class="ui orange basic left pointing label m-margin-tb-tiny">Eating</div>
+                    <div class="ui orange basic left pointing label m-margin-tb-tiny">Playing</div>
+                    <div class="ui orange basic left pointing label m-margin-tb-tiny">Sleeping</div>
+                </div>
+                <div class="ui attached segment">
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Java</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Arithmetic</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">MYSQL</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Angular</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Middleware</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Python</div>
+                </div>
+                <div class="ui bottom attached segment">
+                    <a href="https://github.com/huoxubugai/blog" target="_blank" class="ui circular icon button"><i
+                            class="github icon"></i></a>
+                    <a class="ui qq circular icon button" data-content="lingfen56666" data-position="bottom center"><i
+                            class="weixin icon"></i></a>
+                    <a class="ui qq circular icon button" data-content="1032774690"
+                       data-position="bottom center"><i class="qq icon"></i></a>
+                </div>
+
+                <div class="ui wechat-qr flowing popup transition hidden">
+                    <img src="../static/images/wechat.jpg" alt="" class="ui rounded image" style="width: 110px">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<br>
+<br>
+<!--底部footer-->
+{{template "footer"}}
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.wechat').popup({
+        popup: $('.wechat-qr'),
+        position: 'bottom center'
+    });
+    $('.qq').popup();
+
+</script>
+</body>
+</html>

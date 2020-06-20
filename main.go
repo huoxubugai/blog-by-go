@@ -24,6 +24,8 @@ func main() {
 	setTemplate(router)
 	router.GET("/", controllers.IndexGet)
 	router.GET("/blog/:id", controllers.BlogGet)
+	router.GET("/about", controllers.AboutMe)
+	router.GET("/types/:id", controllers.TypesGet)
 	router.Run()
 }
 

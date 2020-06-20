@@ -37,5 +37,33 @@ func GetBlogById(id int) (models.Blog, error) {
 	if err != nil {
 		return models.Blog{}, err
 	}
+	blog.Category, err = GetTypeById(blog.TypeId)
+	if err != nil {
+		return models.Blog{}, err
+	}
+	blog.User, err = GetUserById(blog.UserId)
+	if err != nil {
+		return models.Blog{}, err
+	}
 	return blog, nil
+}
+
+func GetBlogByTypeId(id int) ([]models.Blog, error) {
+	var blogs []models.Blog
+	err := config.DB.Where("type_id=?", id).Find(&blogs).Error
+	if err != nil {
+		return nil, err
+	}
+	for i, blog := range blogs {
+		blog.Category, err = GetTypeById(blog.TypeId)
+		if err != nil {
+			return []models.Blog{}, err
+		}
+		blog.User, err = GetUserById(blog.UserId)
+		if err != nil {
+			return []models.Blog{}, err
+		}
+		blogs[i] = blog
+	}
+	return blogs, nil
 }

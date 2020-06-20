@@ -21,3 +21,11 @@ func GetBlogById(id int) (models.Blog, error) {
 	}
 	return blog, nil
 }
+
+func GetBlogByTypeId(id int) ([]models.Blog, error) {
+	blogs, err := db.GetBlogByTypeId(id)
+	if err != nil {
+		return nil, err
+	}
+	return blogs, nil
+}
