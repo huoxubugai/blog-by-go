@@ -50,7 +50,10 @@ func TestInsertType(t *testing.T) {
 }
 
 func TestGetMaxBlogNumsInType(t *testing.T) {
-	typeId := GetMaxBlogNumsInType()
+	typeId, err := GetMaxBlogNumsInType()
+	if err != nil {
+		typeId = 0
+	}
 	fmt.Println("最大博客数量类型的id为：", typeId)
 }
 
@@ -80,6 +83,16 @@ func TestGetBlogByTypeId(t *testing.T) {
 	}
 	for _, v := range blogs {
 		fmt.Println(v.Title)
+	}
+}
+
+func TestGetBlogByTagId(t *testing.T) {
+	blogs, err := GetBlogByTagId(2)
+	if err != nil {
+		t.Log(err)
+	}
+	for _, blog := range blogs {
+		fmt.Println("博客标题：", blog.Title)
 	}
 }
 

@@ -4,6 +4,7 @@ import (
 	"blog/config"
 	"blog/models"
 	"log"
+	"strconv"
 )
 
 func GetAllBlog() (blogs []*models.Blog, err error) {
@@ -64,6 +65,31 @@ func GetBlogByTypeId(id int) ([]models.Blog, error) {
 			return []models.Blog{}, err
 		}
 		blogs[i] = blog
+	}
+	return blogs, nil
+}
+
+func GetBlogByTagId(id int) ([]models.Blog, error) {
+	var blogs []models.Blog
+	strId := strconv.Itoa(id)
+	param := "%" + strId + "%"
+	rows, err := config.DB.Raw("select * from blog where tag_ids like ?", param).Rows()
+	defer rows.Close()
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		var blog models.Blog
+		config.DB.ScanRows(rows, &blog)
+		blog.User, err = GetUserById(blog.UserId)
+		if err != nil {
+			return nil, err
+		}
+		blog.Category, err = GetTypeById(blog.TypeId)
+		if err != nil {
+			return nil, err
+		}
+		blogs = append(blogs, blog)
 	}
 	return blogs, nil
 }

@@ -13,6 +13,7 @@ type Blog struct {
 	UserId       int       `gorm:"column:user_id;type:int;not null"`
 	CreatedAt    time.Time `gorm:"column:created_at;not null"`
 	UpdatedAt    time.Time `gorm:"column:updated_at;default:current_timestamp"`
+	TagIds       string    `gorm:"column:tag_ids;type:varchar(30)"`
 
 	Category `gorm:"-"`
 	User     `gorm:"-"`

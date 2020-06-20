@@ -26,6 +26,7 @@ func main() {
 	router.GET("/blog/:id", controllers.BlogGet)
 	router.GET("/about", controllers.AboutMe)
 	router.GET("/types/:id", controllers.TypesGet)
+	router.GET("/tags/:id", controllers.TagsGet)
 	router.Run()
 }
 

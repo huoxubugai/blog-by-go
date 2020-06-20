@@ -3,7 +3,7 @@
 <head th:replace="_fragments :: head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>分类</title>
+    <title>标签</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
     <link rel="stylesheet" href="../static/css/me.css">
 </head>
@@ -19,24 +19,23 @@
         <div class="ui top attached segment">
             <div class="ui middle aligned two column grid">
                 <div class="column">
-                    <h3 class="ui teal header">分类</h3>
+                    <h3 class="ui teal header">标签</h3>
                 </div>
                 <div class="right aligned column">
-                    共 <h2 class="ui orange header m-inline-block m-text-thin"> 14 </h2> 条博客
+                    共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${page.total}"> 14 </h2> 条博客
                 </div>
             </div>
         </div>
 
         <div class="ui attached segment m-padded-tb-large">
-            <div class="ui labeled button m-margin-tb-tiny" th:each="type : ${types}">
-                {{range .types}}
-                    <a href="/types/{{.Id}}" class="ui basic  button"
-                       th:classappend="${type.id==activeTypeId} ? 'teal'">{{.Name}}</a>
-                    <div class="ui basic  left pointing label" th:classappend="${type.id==activeTypeId} ? 'teal'"
-                    >{{.BlogNums}}
-                    </div>
-                {{end}}
-            </div>
+            {{range .tags}}
+                <a href="/tags/{{.Id}}"
+                   class="ui basic left pointing large label m-margin-tb-tiny"
+                   th:classappend="${tag.id==activeTagId} ? 'teal'" th:each="tag : ${tags}">
+                    <span>{{.Name}}</span>
+                    <!--<div class="detail" th:text="${tag.blogNums}">23</div>-->
+                </a>
+            {{end}}
         </div>
 
         <div class="ui top attached teal segment">
@@ -91,21 +90,9 @@
             {{end}}
         </div>
 
+
         <!--footer-->
-        <!--<div class="ui bottom attached segment" th:if="${pageInfo.pages}>1">-->
-        <!--<div class="ui middle aligned two column grid">-->
-        <!--<div class="column" th:if="${pageInfo.hasPreviousPage}">-->
-        <!--<div class="item"><a class="ui mini purple basic button"-->
-        <!--th:href="@{'/types/'+${activeTypeId}(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="right aligned column" th:if="${pageInfo.hasNextPage}">-->
-        <!--<div class="item"><a class="ui mini purple basic button"-->
-        <!--th:href="@{'/types/'+${activeTypeId}(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
+
         <!--分页组件-->
         <div class="ui attached center aligned segment">
             <div class="ui pagination stackable menu">
@@ -149,7 +136,9 @@
             <input type="hidden" id="first" th:value="${page.getPageNum()}"/>
             <input type="hidden" id="last" th:value="${page.pages}"/>
         </div>
+
     </div>
+</div>
 </div>
 
 <br>
