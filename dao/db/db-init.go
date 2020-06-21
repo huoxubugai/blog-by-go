@@ -11,6 +11,7 @@ func InitDb(dns string) (*gorm.DB, error) {
 	db, err := gorm.Open("mysql", dns)
 	db.SingularTable(true)
 	db.AutoMigrate(&models.User{}, &models.Category{}, &models.Blog{}, &models.Tag{})
+	db.LogMode(true)
 	//table := db.HasTable("user")
 	//if table==true{
 	//	fmt.Println("存在user表")

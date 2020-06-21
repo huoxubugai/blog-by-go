@@ -15,6 +15,7 @@ func init() {
 	dns := "root:wang6490918@tcp(localhost:3306)/blog?parseTime=true"
 	db, err := gorm.Open("mysql", dns)
 	db.SingularTable(true)
+	db.LogMode(true)
 	config.DB = db
 	if err != nil {
 		panic(err)
@@ -93,6 +94,16 @@ func TestGetBlogByTagId(t *testing.T) {
 	}
 	for _, blog := range blogs {
 		fmt.Println("博客标题：", blog.Title)
+	}
+}
+
+func TestGetBlogYears(t *testing.T) {
+	years, err := GetBlogYears()
+	if err != nil {
+		t.Log(err)
+	}
+	for _, year := range years {
+		fmt.Println("年份是：", year)
 	}
 }
 

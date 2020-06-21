@@ -5,6 +5,7 @@ import (
 	"blog/models"
 	"log"
 	"strconv"
+	"time"
 )
 
 func GetAllBlog() (blogs []*models.Blog, err error) {
@@ -92,4 +93,20 @@ func GetBlogByTagId(id int) ([]models.Blog, error) {
 		blogs = append(blogs, blog)
 	}
 	return blogs, nil
+}
+
+func GetBlogYears() ([]time.Time, error) {
+	var years []time.Time
+	rows, err := config.DB.Raw("select  created_at  from blog  ").Rows()
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var publishedYear time.Time
+		//publishedYear.Format("2006")
+		config.DB.ScanRows(rows, &publishedYear)
+		years = append(years, publishedYear)
+	}
+	return years, nil
 }
